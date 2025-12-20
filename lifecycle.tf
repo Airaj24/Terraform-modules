@@ -6,7 +6,7 @@ resource "aws_instance" "web" {
   # availability_zone = "ap-south-1a"
   availability_zone = "ap-south-1b"
   tags = {
-    "Name" = "web-1"
+    "Name" = "web-2"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
