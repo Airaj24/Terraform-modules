@@ -24,11 +24,11 @@ terraform {
 # Create EC2 Instance
 resource "aws_instance" "web1" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
-  instance_type     = "t2.medium"
+  instance_type     = "t2.micro"
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "bala"
+    "Name" = "arun"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
@@ -39,11 +39,11 @@ resource "aws_instance" "web1" {
 # Create EC2 Instance
 resource "aws_instance" "web2" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
-  instance_type     = "t2.medium"
+  instance_type     = "t2.micro"
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "vignesh"
+    "Name" = "prem"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
@@ -53,11 +53,11 @@ resource "aws_instance" "web2" {
 
 resource "aws_instance" "web3" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
-  instance_type     = "t2.medium"
+  instance_type     = "t2.micro"
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "raja"
+    "Name" = "kumar"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
