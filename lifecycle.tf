@@ -13,10 +13,9 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket         = "terraform-state-airaj24"
-    key            = "terraform-module/terraform.tfstate"
+    bucket         = "demo-project-pente-ai"
+    key            = "Terraform_State_file/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform-locks"
     encrypt        = true
   }
 }
