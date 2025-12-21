@@ -11,6 +11,16 @@ provider "aws" {
   region = "us-east-1"
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "terraform-state-airaj24"
+    key            = "terraform-module/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "terraform-locks"
+    encrypt        = true
+  }
+}
+
 
 # Create EC2 Instance
 resource "aws_instance" "web1" {
