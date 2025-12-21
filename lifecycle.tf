@@ -24,7 +24,7 @@ terraform {
 # Create EC2 Instance
 resource "aws_instance" "web1" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
-  instance_type     = "t2.micro"
+  instance_type     = "t2.medium"
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
@@ -39,7 +39,7 @@ resource "aws_instance" "web1" {
 # Create EC2 Instance
 resource "aws_instance" "web2" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
-  instance_type     = "t2.micro"
+  instance_type     = "t2.medium"
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
@@ -53,7 +53,7 @@ resource "aws_instance" "web2" {
 
 resource "aws_instance" "web3" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
-  instance_type     = "t2.micro"
+  instance_type     = "t2.medium"
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
