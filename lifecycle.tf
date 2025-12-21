@@ -11,6 +11,15 @@ provider "aws" {
   region = "us-east-1"
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "demo-project-pente-ai"
+    key            = "Terraform_State_file/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+  }
+}
+
 
 # Create EC2 Instance
 resource "aws_instance" "web1" {
