@@ -13,7 +13,7 @@ provider "aws" {
 
 
 # Create EC2 Instance
-resource "aws_instance" "web" {
+resource "aws_instance" "web1" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
   instance_type     = "t2.micro"
   # availability_zone = "ap-south-1a"
@@ -28,7 +28,7 @@ resource "aws_instance" "web" {
 }
 
 # Create EC2 Instance
-resource "aws_instance" "web" {
+resource "aws_instance" "web2" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
   instance_type     = "t2.micro"
   # availability_zone = "ap-south-1a"
