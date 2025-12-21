@@ -28,7 +28,7 @@ resource "aws_instance" "web1" {
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "ravi"
+    "Name" = "bala"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
@@ -43,7 +43,7 @@ resource "aws_instance" "web2" {
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "ram"
+    "Name" = "vignesh"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
@@ -57,7 +57,7 @@ resource "aws_instance" "web3" {
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "prabu"
+    "Name" = "raja"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
