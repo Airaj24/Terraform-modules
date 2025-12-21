@@ -12,7 +12,6 @@ provider "aws" {
 }
 
 
-
 # Create EC2 Instance
 resource "aws_instance" "web" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
@@ -20,7 +19,7 @@ resource "aws_instance" "web" {
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "Rajvignesh"
+    "Name" = "bala"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
