@@ -19,7 +19,7 @@ resource "aws_instance" "web1" {
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "bala"
+    "Name" = "balamuguthan"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
@@ -35,6 +35,20 @@ resource "aws_instance" "web2" {
   availability_zone = "us-east-1a"
   tags = {
     "Name" = "raja"
+  }
+  lifecycle {
+   #ignore_changes = [ami, availability_zone]
+    ignore_changes = [tags]
+  }
+}
+
+resource "aws_instance" "web3" {
+  ami               = "ami-068c0051b15cdb816" # Amazon Linux
+  instance_type     = "t2.micro"
+  # availability_zone = "ap-south-1a"
+  availability_zone = "us-east-1a"
+  tags = {
+    "Name" = "vignesh"
   }
   lifecycle {
    #ignore_changes = [ami, availability_zone]
