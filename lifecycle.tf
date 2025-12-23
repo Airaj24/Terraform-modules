@@ -30,10 +30,10 @@ resource "aws_instance" "web1" {
   tags = {
     "Name" = "arun"
   }
-  lifecycle {
+  /*lifecycle {
    #ignore_changes = [ami, availability_zone]
     ignore_changes = [tags]
-  }
+  }*/
 }
 
 # Create EC2 Instance
@@ -45,10 +45,10 @@ resource "aws_instance" "web2" {
   tags = {
     "Name" = "prem"
   }
-  lifecycle {
+  /*lifecycle {
    #ignore_changes = [ami, availability_zone]
     ignore_changes = [tags]
-  }
+  }*/
 }
 
 resource "aws_instance" "web3" {
@@ -59,8 +59,8 @@ resource "aws_instance" "web3" {
   tags = {
     "Name" = "kumar"
   }
-  lifecycle {
+  /*lifecycle {
    #ignore_changes = [ami, availability_zone]
     ignore_changes = [tags]
-  }
+  }*/
 }
