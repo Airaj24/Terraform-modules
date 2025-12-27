@@ -64,3 +64,17 @@ resource "aws_instance" "web3" {
     ignore_changes = [tags]
   }*/
 }
+
+resource "aws_instance" "web4" {
+  ami               = "ami-068c0051b15cdb816" # Amazon Linux
+  instance_type     = "t2.micro"
+  # availability_zone = "ap-south-1a"
+  availability_zone = "us-east-1a"
+  tags = {
+    "Name" = "perumal"
+  }
+  /*lifecycle {
+   #ignore_changes = [ami, availability_zone]
+    ignore_changes = [tags]
+  }*/
+}
