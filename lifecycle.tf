@@ -24,7 +24,7 @@ terraform {
 # Create EC2 Instance
 resource "aws_instance" "web1" {
   ami               = "ami-068c0051b15cdb816" # Amazon Linux
-  instance_type     = "m6i.xlarge"
+  instance_type     = "t2.micro"
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
