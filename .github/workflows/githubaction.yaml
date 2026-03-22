@@ -1,3 +1,4 @@
+```yaml
 name: Terraform CI/CD
 
 on:
@@ -11,10 +12,19 @@ on:
       - main
 
   workflow_dispatch:
+    inputs:
+      confirm_destroy:
+        description: "Type 'DESTROY' to confirm infrastructure deletion"
+        required: false
 
 env:
   TF_VERSION: 1.6.6
   AWS_REGION: us-east-1
+
+# Prevent concurrent apply/destroy runs
+concurrency:
+  group: terraform-prod
+  cancel-in-progress: false
 
 jobs:
 # -------------------------------------------------
@@ -42,7 +52,7 @@ jobs:
       - run: terraform plan
 
 # -------------------------------------------------
-# DRIFT DETECTION → PR + MAIN ONLY
+# DRIFT DETECTION → PR + MAIN + MANUAL
 # -------------------------------------------------
   terraform-drift:
     name: Terraform Drift Detection
@@ -68,26 +78,28 @@ jobs:
       - run: terraform init
 
       - name: Terraform Drift Check
+        id: drift
         run: |
           terraform plan -detailed-exitcode -no-color
+          echo "exitcode=$?" >> $GITHUB_OUTPUT
         continue-on-error: true
 
       - name: Fail if Drift Found
         run: |
-          if [ $? -eq 2 ]; then
+          if [ "${{ steps.drift.outputs.exitcode }}" = "2" ]; then
             echo "❌ Terraform drift detected (console changes found)"
             exit 1
           fi
 
 # -------------------------------------------------
-# APPLY → MANUAL ONLY (BLOCKED BY DRIFT)
+# APPLY → MANUAL ONLY
 # -------------------------------------------------
   terraform-apply:
     name: Terraform Apply (Manual)
     needs:
       - terraform-plan
       - terraform-drift
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_destroy != 'DESTROY'
     runs-on: ubuntu-latest
     environment: prod
 
@@ -106,3 +118,37 @@ jobs:
 
       - run: terraform init
       - run: terraform apply -auto-approve
+
+# -------------------------------------------------
+# DESTROY → MANUAL ONLY (REQUIRES CONFIRMATION)
+# -------------------------------------------------
+  terraform-destroy:
+    name: Terraform Destroy (Manual)
+    needs:
+      - terraform-plan
+      - terraform-drift
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_destroy == 'DESTROY'
+    runs-on: ubuntu-latest
+    environment: prod
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - run: terraform init
+
+      - name: Terraform Destroy Plan
+        run: terraform plan -destroy
+
+      - name: Terraform Destroy Apply
+        run: terraform destroy -auto-approve
+```
