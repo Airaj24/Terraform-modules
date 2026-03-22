@@ -44,7 +44,7 @@ resource "aws_instance" "web2" {
   # availability_zone = "ap-south-1a"
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "raj"
+    "Name" = "raja"
   }
   /*lifecycle {
    #ignore_changes = [ami, availability_zone]
